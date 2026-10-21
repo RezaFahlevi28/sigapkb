@@ -19,7 +19,7 @@
 
                     <div>
                         <label for="email" class="block text-xs font-bold text-slate-700 mb-1">Alamat Email Petugas</label>
-                        <input type="email" id="email" name="email" value="{{ old('email', 'admin@sigapkb.test') }}" required autofocus placeholder="admin@sigapkb.test" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20 text-sm transition-colors @error('email') border-rose-400 @enderror">
+                        <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus placeholder="contoh: petugas@sigapkb.my.id" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20 text-sm transition-colors @error('email') border-rose-400 @enderror">
                         @error('email')
                             <p class="text-xs text-rose-600 mt-1">{{ $message }}</p>
                         @enderror
@@ -29,7 +29,7 @@
                         <div class="flex items-center justify-between mb-1">
                             <label for="password" class="block text-xs font-bold text-slate-700">Kata Sandi (Password)</label>
                         </div>
-                        <input type="password" id="password" name="password" value="password" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20 text-sm transition-colors @error('password') border-rose-400 @enderror">
+                        <input type="password" id="password" name="password" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20 text-sm transition-colors @error('password') border-rose-400 @enderror">
                         @error('password')
                             <p class="text-xs text-rose-600 mt-1">{{ $message }}</p>
                         @enderror
