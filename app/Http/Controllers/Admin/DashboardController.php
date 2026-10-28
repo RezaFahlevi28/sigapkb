@@ -7,6 +7,7 @@ use App\Models\KbService;
 use App\Models\PatientRegistration;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -44,7 +45,14 @@ class DashboardController extends Controller
             ->get();
 
         // Monthly recap breakdown for the current year
-        $monthlyTrends = PatientRegistration::selectRaw("strftime('%m', service_date) as month_num, count(*) as total")
+        $driver = DB::connection()->getDriverName();
+        $monthExpression = match ($driver) {
+            'sqlite' => "strftime('%m', service_date)",
+            'pgsql' => "to_char(service_date, 'MM')",
+            default => "DATE_FORMAT(service_date, '%m')",
+        };
+
+        $monthlyTrends = PatientRegistration::selectRaw("{$monthExpression} as month_num, count(*) as total")
             ->whereYear('service_date', $currentYear)
             ->groupBy('month_num')
             ->pluck('total', 'month_num')
